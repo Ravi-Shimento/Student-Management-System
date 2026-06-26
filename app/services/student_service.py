@@ -55,3 +55,14 @@ class StudentService:
         self.save_students(students)
 
         return student_dict
+
+    def delete_student(self, student_id):
+        """Delete a student by ID."""
+        students = self.load_students()
+        remaining_students = [student for student in students if student["id"] != student_id]
+
+        if len(remaining_students) == len(students):
+            return False
+
+        self.save_students(remaining_students)
+        return True

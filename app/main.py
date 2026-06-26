@@ -25,4 +25,11 @@ def health_check():
     }
 
 
+@app.get("/version")
+def get_version():
+    return {
+        "version": "1.0.0"
+    }
+
+
 app.include_router(student_router)
