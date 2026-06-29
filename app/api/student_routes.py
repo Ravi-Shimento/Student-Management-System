@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, HTTPException, status
 
 from app.schemas.student_schema import Student
@@ -14,6 +16,15 @@ student_service = StudentService()
 @router.get("/")
 def get_students():
     return student_service.get_all_students()
+
+@router.get("/{id}", response_model=Student)
+def get_student(id: int) -> dict[str, Any]:
+    student = student_service.get_student_by_id(id)
+
+    if student is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Student not found")
+
+    return student
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_student(student: Student):

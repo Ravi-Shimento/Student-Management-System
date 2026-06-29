@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 
 class StudentService:
@@ -40,6 +41,16 @@ class StudentService:
         """Get all students data from json """
 
         return self.load_students()
+
+    def get_student_by_id(self, student_id: int) -> dict[str, Any] | None:
+        """Get a single student by ID."""
+        students = self.load_students()
+
+        for student in students:
+            if student["id"] == student_id:
+                return student
+
+        return None
 
     
     def create_student(self, student):

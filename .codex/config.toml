@@ -1,0 +1,2 @@
+[agents.code-reviewer]
+config_file = "agents/code-reviewer.toml"
